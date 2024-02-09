@@ -1,0 +1,259 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.edit-button {
+  padding: 6px !important;
+}
+
+.fa-ve-button {
+  color:gray;
+}
+
+/* .subset.active {
+  background-color: rgb(0, 160, 177) !important;
+} */
+
+/* Set the color of buttons inside active rows (which have a different background color)
+.active > form > div > span > span > .edit-button > .fa-ve-button  {
+  color:white;
+}
+
+.active > form > div > span > span > .edit-button:hover > .fa-ve-button  {
+  color:black;
+} */
+
+/* .list-group-item.active.fa-ve-button:hover {
+  color:white !important;
+} */
+.edit-button:hover > .fa-ve-button {
+  color:#0d6efd;
+}
+
+.color:active {
+  color:red !important;
+}
+
+.list-group-item.active {
+  color: white !important;
+}
+
+.math-item {
+  border: 1px dashed gray;
+  background-color: white;
+  margin-left: 0.1em;
+  padding-left: 0.1em;
+  margin-right: 0.1em;
+  padding-right: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.math-svg{
+  height:28px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 4px;
+}
+
+.dropready[contenteditable=true]:empty:not(:focus):before{
+  content:attr(data-ph);
+  color:black;
+}
+
+[contenteditable=true]:empty:not(:focus):before{
+  content:attr(data-ph);
+  color:grey;
+}
+
+.math-error{
+  font-family: monospace;
+  margin-left: 15px;
+
+}
+
+.link-unstyled, .link-unstyled:link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.animate-highlight {
+  background: white;
+  animation: highlightbg 4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes highlightbg {
+  from {background-color: rgb(255, 192, 75);}
+  to {background-color: white;}
+}
+
+.modal-90w {
+  width: 95% !important;
+  max-width: none!important;
+}
+
+.modal-50w {
+  width: 50% !important;
+  max-width: none!important;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+/* Prevent the default Plotly move cursor since we need to override it for drawing polygons. */
+.cursor-move {
+  cursor: inherit !important;
+}
+
+/* In screenshot mode, Plotly wants to change the cursor, but we've disabled everything, so prevent that from happening. */
+.screenshotPlotDiv, .screenshotPlotDiv * {
+  cursor: default !important;
+}
+
+/* Remove the down arrow in the share button */
+#share-button.dropdown-toggle::after{
+  display: none; 
+}
+
+/* #dropdown-screenshot.dropdown-toggle::after{
+  display: none;
+} */
+
+
+div.valueHolder > div > div.subsetCheckbox {
+  display: none;
+}
+
+.noSelectOutline > button:focus {
+    box-shadow: none !important;
+}
+
+.markerSizeButton {
+    display:'flex';
+    align-items: 'center';
+    justify-content: 'center';
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+    opacity: 1;
+}
+
+.dropdown-menu-center {
+  left: -8em !important;
+}
+
+/* .grip {
+  background-size: cover;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjODg4Ij48L3JlY3Q+Cjwvc3ZnPg==");
+  background-repeat: no-repeat;
+  top: 0px;
+  left: -10px;
+  width: 10px;
+  height: 15px;
+  cursor: grab;
+  cursor: -webkit-grab;
+  margin: 0.5em;
+} */
+
+.grip:hover::before {
+  content: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3C!-- Created with Inkscape (http://www.inkscape.org/) --%3E%3Csvg width='1.2902359mm' height='7.0165582mm' viewBox='0 0 1.2902359 7.0165582' version='1.1' id='svg5' inkscape:version='1.2.2 (b0a8486, 2022-12-01)' sodipodi:docname='grab-handle2.svg' xmlns:inkscape='http://www.inkscape.org/namespaces/inkscape' xmlns:sodipodi='http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'%3E%3Csodipodi:namedview id='namedview7' pagecolor='%23ffffff' bordercolor='%23666666' borderopacity='1.0' inkscape:showpageshadow='2' inkscape:pageopacity='0.0' inkscape:pagecheckerboard='0' inkscape:deskcolor='%23d1d1d1' inkscape:document-units='mm' showgrid='false' inkscape:zoom='13.455443' inkscape:cx='-8.4352479' inkscape:cy='6.8002219' inkscape:current-layer='layer1' /%3E%3Cdefs id='defs2' /%3E%3Cg inkscape:label='Layer 1' inkscape:groupmode='layer' id='layer1' transform='translate(-30.201002,-89.993431)'%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6858' width='0.3914665' height='0.3914665' x='30.214907' y='89.993431' /%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6860' width='0.3914665' height='0.3914665' x='30.214907' y='91.422058' /%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6862' width='0.3914665' height='0.3914665' x='30.214907' y='92.850693' /%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6864' width='0.3914665' height='0.3914665' x='30.201002' y='94.27932' /%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6866' width='0.3914665' height='0.3914665' x='30.201002' y='95.707954' /%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6872' width='0.3914665' height='0.3914665' x='31.099771' y='89.993431' /%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6874' width='0.3914665' height='0.3914665' x='31.099771' y='91.422058' /%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6876' width='0.3914665' height='0.3914665' x='31.099771' y='92.850693' /%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6878' width='0.3914665' height='0.3914665' x='31.085867' y='94.27932' /%3E%3Crect style='fill:%23535353;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-opacity:0.238806' id='rect6880' width='0.3914665' height='0.3914665' x='31.085867' y='95.707954' /%3E%3C/g%3E%3C/svg%3E%0A");
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 20px;
+  color: #ccc; /* icon color */
+  text-align: center;
+  line-height: 84px; /* adjust as needed to vertically center the icon */
+}
+
+.clear-searchbox-button {
+  position: absolute;
+  width: 36px;
+  left: -34px;
+  border: 0px !important;
+}
+
+/* Initial state: the element is invisible */
+.filter-button {
+  opacity: 0.15;
+}
+
+/* When parent is hovered, the element becomes visible */
+.filter-button-parent:hover .filter-button {
+  opacity: 1;
+}
+
+.text-column-button {
+  color: var(--bs-body-color) !important;
+}
+
+.text-column-button:hover {
+  color: white !important;
+}
+
+.text-column-button:not(:hover) .label-column-button {
+  /* CSS properties to apply when parent is not hovered */
+  color: gray;
+}
+
+/* #legend-switch:checked {
+  background-color: white !important;
+} */
+
+.rotated-container {
+  transform: rotate(90deg);
+  transform-origin: left top;
+  /* These next two properties will help in the positioning */
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.text {
+  transform: rotate(-90deg);
+  transform-origin: left top;
+  white-space: nowrap;
+  /* Adjustments for position & padding */
+  padding: 5px;
+  background: lightgray; /* Just for visual clarity */
+}

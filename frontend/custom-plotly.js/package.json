@@ -1,0 +1,6 @@
+{
+    "name": "custom-plotly.js",
+    "version": "1.0.0",
+    "main": "plotly.min.js"
+  }
+  

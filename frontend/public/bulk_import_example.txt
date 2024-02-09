@@ -1,0 +1,4 @@
+Abcd	ABCDEFG	15	Red
+Group 1	HIJKLMN	4	Blue
+Group 1	QRST	4	Blue
+Group 2	AA	4	#bbbbbbFF
