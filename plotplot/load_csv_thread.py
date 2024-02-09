@@ -122,7 +122,7 @@ class LoadCsvThread(threading.Thread):
                 chunksize = 8192  # I don't know what size is better
                 lines_read = 0
 
-                reader = pd.read_csv(self.path, chunksize=chunksize)
+                reader = pd.read_csv(self.path, chunksize=chunksize, index_col=False)
                 df_list = []
                 for chunk in reader:
                     lines_read += len(chunk)
