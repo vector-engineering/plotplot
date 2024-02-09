@@ -46,7 +46,7 @@ def main():
     Timer(1, lambda: webbrowser.open_new(f'http://{args.ip}:{port}{url_prefix}')).start()  # Open a web browser after the server starts
     print(f'Starting plotplot at: http://{args.ip}:{port}{url_prefix}')
     
-    serve(app, host=args.ip, port=port, url_prefix=url_prefix, threads=6)  # Note: The waitress might not accept url_prefix directly
+    serve(app, host=args.ip, port=port, url_prefix=url_prefix, threads=6, max_request_body_size=21474836480)
 
 if __name__ == "__main__":
     main()
