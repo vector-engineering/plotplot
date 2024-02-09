@@ -16,6 +16,7 @@ from . import api_utils
 from plotplot.user import User
 import os
 import json
+import uuid
 from . import plotplot_config
 
 app_login = Blueprint('login', __name__)
@@ -31,23 +32,42 @@ GOOGLE_DISCOVERY_URL = (
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 
-@app_login.route("/api/config")
+@app_login.route("/api/config", methods=['POST'])
 def send_config_and_maybe_login_generic_user():
+    data = request.get_json()
+    local_email = api_utils.get_strp(data, 'localEmail')
+
     requires_login = plotplot_config.get_boolean_with_default('google login', 'google_auth_enabled', False)
+    multi_user_mode = plotplot_config.get_boolean_with_default('multiuser', 'multi_user_mode', False)
 
     config = {
         'requires_login': requires_login,
+        'multi_user_mode': multi_user_mode,
         'google_drive_enabled': plotplot_config.get_boolean_with_default('google drive', 'google_drive_connection_enabled', False),
         'juypter_export_enabled': plotplot_config.get_boolean_with_default('jupyter notebook export', 'jupyter_notebook_export_enabled', False),
     }
 
+    users_email = ''
     if not requires_login:
-        # Immediately log the user into the generic user account
+        if not multi_user_mode:
+            # Immediately log the user into the generic user account
 
-        unique_id = 0
-        users_name = 'User'
-        users_email = 'user@plotplot.org'
-        picture = ''
+            unique_id = 0
+            users_name = 'User'
+            users_email = 'user@plotplot.org'
+            picture = ''
+        else:
+            if local_email is not None:
+                unique_id = local_email.removesuffix('-no-login@plotplot.org')
+                users_name = unique_id
+                users_email = local_email
+                picture = ''
+            else:
+                # no login, but in multi-user-mode.  Generate a unique user ID and log the user in.
+                unique_id = str(uuid.uuid4())
+                users_name = unique_id
+                users_email = f'{unique_id}-no-login@plotplot.org'
+                picture = ''
 
         user = User(id_=unique_id,
                     name=users_name,
@@ -61,7 +81,7 @@ def send_config_and_maybe_login_generic_user():
         # Begin user session by logging the user in
         login_user(user, remember=True)
 
-    return json.dumps({'config': config})
+    return json.dumps({'config': config, 'email': users_email})
 
 @app_login.route("/api/username")
 @login_required

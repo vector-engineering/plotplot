@@ -8,7 +8,7 @@ import axios from 'axios';
 import { Plotplot } from './Plotplot/Plotplot';
 import { ErrorBoundary } from './Plotplot/ErrorBoundary';
 import { FileDropBox } from './FileDropBox';
-import { nFormatter, matchesSearch } from './utility';
+import { nFormatter, matchesSearch, showUserData } from './utility';
 
 import './App.css';
 
@@ -175,7 +175,15 @@ class App extends React.Component {
     }
 
     getBackendConfig() {
-        fetch("api/config")
+        const localEmail = localStorage.getItem('plotplot-user')
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                localEmail: localEmail,
+            })
+        }
+        fetch("api/config", requestOptions)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -184,13 +192,22 @@ class App extends React.Component {
                         console.log(result)
                         return
                     }
-
-                    if ('config' in result['config'] && result['config']['requires_login'] == false) {
-                        this.setState({
-                            backendConfig: result['config'],
-                            name: 'User',
-                            email: 'user@plotplot.org',
-                        }, this.loadData)
+                    if ('config' in result && result['config']['requires_login'] == false) {
+                        if (result['config']['multi_user_mode']) {
+                            // Save the generated email to local storage
+                            localStorage.setItem('plotplot-user', result['email'])
+                            this.setState({
+                                backendConfig: result['config'],
+                                name: 'User',
+                                email: result['email'],
+                            }, this.loadData)
+                        } else {
+                            this.setState({
+                                backendConfig: result['config'],
+                                name: 'User',
+                                email: 'user@plotplot.org',
+                            }, this.loadData)
+                        }
                     } else {
                         this.setState({
                             backendConfig: result['config'],
@@ -631,7 +648,7 @@ class App extends React.Component {
         const showToast = errorToast.length == 0 ? false : true
 
         let user_data = <></>
-        if (this.state.email && this.state.email != 'user@plotplot.org') {
+        if (showUserData(this.state.email)) {
             user_data = <><img style={{ width: 30, borderRadius: 30, marginRight: '8px' }} src={this.state.profilePicture} /> {this.state.name} (<a href="logout">logout</a>)</>
         }
 

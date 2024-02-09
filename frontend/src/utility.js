@@ -19,6 +19,13 @@ export function throttle(callback, limit) {
     }
 }
 
+export function showUserData(email) {
+    if (email && email != 'user@plotplot.org' && !email.endsWith('-no-login@plotplot.org')) {
+        return true
+    }
+    return false
+}
+
 /**
  * @description Formats numbers as 1K (M,G,T, etc...) when above 3 digits. From: https://stackoverflow.com/a/9462382/730138
  * @param {number} num - The number to format

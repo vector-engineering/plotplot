@@ -58,6 +58,15 @@ GOOGLE_DRIVE_KEY_JSON_PATH=
 # Top level folder ID for the folder you want to connect in Google Drive to Plotplot. When you navigate to that folder in a browser, this ID is in the URL.
 GOOGLE_DRIVE_FOLDER_ID=
 
+################################################
+[multiuser]
+################################################
+# Allow for multiple users.
+# Required for GOOGLE_AUTH_ENABLED = true.
+#   If GOOGLE_AUTH_ENABLED = true, users will be logged in via Google.
+#   Otherwise, users will be saved via browser.
+# Default: false
+MULTI_USER_MODE = false
 
 
 ################################################
@@ -162,6 +171,10 @@ def validate_config(config):
             return 'Configuration error: in section [google drive] the value "GOOGLE_DRIVE_FOLDER_ID" is missing.  Add that value or disable Google Drive connection by setting GOOGLE_DRIVE_CONNECTION_ENABLED=false'
 
     if get_boolean_with_default_helper(config, 'google login', 'google_auth_enabled', False):
+        # Ensure multi-user mode is enabled.
+        if get_boolean_with_default_helper(config, 'multiuser', 'multi_user_mode', False):
+            return 'Configuration error: cannot have GOOGLE_AUTH_ENABLED=true with  MULTI_USER_MODE=false.'
+            
         try:
             p = config['google login']['google_auth_client_id']
         except KeyError:

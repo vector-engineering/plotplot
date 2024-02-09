@@ -15,7 +15,7 @@ import { SearchBoxWithClearButton } from './SearchBoxWithClearButton';
 import preval from 'preval.macro'
 import { saveAs } from 'file-saver';
 
-import { makeNameUnique, generatePlotKey } from '../utility';
+import { makeNameUnique, generatePlotKey, showUserData } from '../utility';
 import { getSubsetIds, subsetSelectedEntryFromSubset, getDefaultMarkerSize, getDefaultMarkerColor, doPlotColoring, sortSelectedOptions, getSubsetIdsInGraphOrder } from './PlotGroup/PlotGroupUtils'
 
 
@@ -738,7 +738,7 @@ class Plotplot extends React.Component {
                     >Copy</Button>
                 </div>
             </DropdownButton></>)
-        if (this.props.email == 'user@plotplot.org') {
+        if (!showUserData(this.props.email)) {
             shareButton = <></>
         }
 
@@ -777,7 +777,7 @@ class Plotplot extends React.Component {
 
         document.title = this.props.filename + ' - Plotplot'
         let user_data = <></>
-        if (this.props.email != 'user@plotplot.org') {
+        if (showUserData(this.props.email)) {
             user_data = <><img style={{ width: 30, borderRadius: 30, marginRight: '8px', flex: '1 1 auto' }} src={this.props.profilePicture} /> {this.props.name} (<a href="logout">logout</a>)</>
         }
         return (
