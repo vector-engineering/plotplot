@@ -211,6 +211,15 @@ def get_boolean_with_default_helper(config, section, key, default):
     except configparser.NoOptionError:
         return default
 
+def allow_recent_files():
+    config = get_plotplot_config()
+    multi_user_mode = get_boolean_with_default_helper(config, 'multiuser', 'multi_user_mode', False)
+    google_auth = get_boolean_with_default_helper(config, 'google login', 'google_auth_enabled', False)
+
+    if multi_user_mode and not google_auth:
+        return False
+    return True
+
 def get_plotplot_config():
     global loaded_config
     if loaded_config is not None:

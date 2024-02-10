@@ -45,6 +45,7 @@ def send_config_and_maybe_login_generic_user():
         'multi_user_mode': multi_user_mode,
         'google_drive_enabled': plotplot_config.get_boolean_with_default('google drive', 'google_drive_connection_enabled', False),
         'juypter_export_enabled': plotplot_config.get_boolean_with_default('jupyter notebook export', 'jupyter_notebook_export_enabled', False),
+        'recent_files_enabled': plotplot_config.allow_recent_files(),
     }
 
     users_email = ''

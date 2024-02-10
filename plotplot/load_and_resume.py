@@ -105,6 +105,10 @@ def file_upload():
 @login_required
 @exception_decorator
 def recent_files():
+    # Check to see if we're allowed to load recent files
+    if not plotplot_config.allow_recent_files():
+        return json.dumps({'error': 'Recent file loading disabled.'})
+        
     dir = api_utils.upload_folder + '/'
     return files_in_folder(dir)
 
@@ -146,6 +150,10 @@ def files_in_folder(dir):
 @login_required
 @exception_decorator
 def load_recent_file():
+    # Check to see if we're allowed to load recent files
+    if not plotplot_config.allow_recent_files():
+        return json.dumps({'error': 'Recent file loading disabled.'})
+
     data = request.get_json()
     filename = get_strp(data, 'filename')
 

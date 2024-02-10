@@ -685,7 +685,13 @@ class App extends React.Component {
             </Table>
         </>)
 
-        let bottomLeft = useRecentFile
+        
+        let bottomLeft = <></>
+
+        if (this.state.backendConfig && 'recent_files_enabled' in this.state.backendConfig && this.state.backendConfig['recent_files_enabled']) {
+            bottomLeft = useRecentFile
+        }
+
         let bottomRight = <></>
 
         if (this.state.backendConfig && 'google_drive_enabled' in this.state.backendConfig && this.state.backendConfig['google_drive_enabled']) {
@@ -847,8 +853,12 @@ class App extends React.Component {
     loadData() {
         this.getUsername()
         this.getExistingSessions()
-        this.getRecentFiles()
-        this.getCloudFiles()
+        if (this.state.backendConfig && 'recent_files_enabled' in this.state.backendConfig && this.state.backendConfig['recent_files_enabled']) {
+            this.getRecentFiles()
+        }
+        if (this.state.backendConfig && 'google_drive_enabled' in this.state.backendConfig && this.state.backendConfig['google_drive_enabled']) {
+            this.getCloudFiles()
+        }
 
         // Load URL parameters
         if (window.location.pathname != '' && window.location.pathname != '/') {
