@@ -172,7 +172,7 @@ def validate_config(config):
 
     if get_boolean_with_default_helper(config, 'google login', 'google_auth_enabled', False):
         # Ensure multi-user mode is enabled.
-        if get_boolean_with_default_helper(config, 'multiuser', 'multi_user_mode', False):
+        if not get_boolean_with_default_helper(config, 'multiuser', 'multi_user_mode', False):
             return 'Configuration error: cannot have GOOGLE_AUTH_ENABLED=true with  MULTI_USER_MODE=false.'
             
         try:

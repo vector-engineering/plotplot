@@ -23,6 +23,9 @@ WORKDIR /app
 
 # If you ran the custom-plotly build from above.
 # COPY --from=plotly-step /plotly.js/dist/plotly.min.js ./frontend/custom-plotly.js/plotly.min.js
+#
+# Otherwise:
+COPY ./frontend/custom-plotly.js/plotly.min.js ./frontend/custom-plotly.js/plotly.min.js
 
 ENV PATH /app/node_modules/.bin:$PATH
 
@@ -34,9 +37,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY ./frontend/package.json ./frontend
 RUN cd frontend && npm install
 
-# If you ran the custom-plotly build from above
-# COPY ./frontend/custom-plotly.js/package.json ./frontend/custom-plotly.js/
-# RUN cd frontend && npm install ./custom-plotly.js/
+COPY ./frontend/custom-plotly.js/package.json ./frontend/custom-plotly.js/
+RUN cd frontend && npm install ./custom-plotly.js/
 
 COPY ./frontend/src ./frontend/src
 COPY ./frontend/public ./frontend/public
@@ -65,7 +67,6 @@ ENV PYTHONUNBUFFERED TRUE
 
 # Set the URL prefix, see https://dlukes.github.io/flask-wsgi-url-prefix.html#mwe
 ENV SCRIPT_NAME $URL_PREFIX
-ENV PLOTPLOT_CONFIG_PATH /app/plotplot.ini
 
 EXPOSE 9042
 WORKDIR /app

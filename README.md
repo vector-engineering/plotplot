@@ -88,16 +88,23 @@ git clone git@github.com:vector-engineering/plotplot.git
 
 ### Step 2: Build docker image
 ```
-docker build -f Dockerfile -t plotplot .
+DOCKER_BUILDKIT=1 docker build -f Dockerfile -t plotplot .
 ```
-Note: you can pass `--build-arg URL_PREFIX=/my-custom-plotplot` if you want to change the URL_PREFIX
+ - pass `--build-arg URL_PREFIX=/my-custom-plotplot` if you want to change the URL_PREFIX
+
 
 ### Step 3: Run docker image
 ```
 # This will run on port 9042
 docker run --restart=unless-stopped -p 0.0.0.0:9042:9042 -d plotplot
 ```
-Then navigate to your-server.com:9042 and you should see plotplot.
+ - The docker image defaults to port 9042, you can change that in the dockerfile.
+ - To use a custom plotplot.ini file, you should mount the file and set the enrionment variable at runtime:
+ ```
+ docker run --restart=unless-stopped -p 0.0.0.0:9042:9042 -d -v /my/dir/plotplot.ini:/app/plotplot.ini -e PLOTPLOT_CONFIG_PATH=/app/plotplot.ini plotplot
+ ```
+Then navigate to your-server.com:9042 and you should see Plotplot.
+
 
 ### Step 4: Nginx / reverse proxy
 A reverse proxy like Nginx is well supported.
