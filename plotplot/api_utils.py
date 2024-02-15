@@ -12,6 +12,7 @@ import copy
 import time
 import html
 import re
+import uuid
 import locale
 
 from . import plotplot_config
@@ -646,6 +647,25 @@ def generate_histogram(df, idxs, fig, x, nbins, hist_type):
 
     return fig, autorange_all
 
+def starts_with_uuid(f):
+    if len(f) < 36:
+        return False
+
+    potential_uuid = f[0:36]
+    try:
+        # Attempt to parse the UUID
+        parsed_uuid = uuid.UUID(potential_uuid, version=4)
+        # Check if the 'hex' part of the UUID matches the input, indicating a valid UUID4
+        # This also checks if the version is 4
+        return str(parsed_uuid) == potential_uuid
+    except (ValueError, AttributeError):
+        # If parsing fails or the version doesn't match, it's not a valid UUID4 at the start
+        return False
+
+def get_filename_from_uuid_filename(uuid_filename):
+    if starts_with_uuid(uuid_filename):
+        return uuid_filename[36+1:] # plus 1 for the "-" we add: uuid4-filename.csv
+    return uuid_filename
 
 def generate_nan_histogram(data, indexes, bins, position, stepgraph=False):
     if len(data) < 1:

@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from .globals import g_process_lock, g_processes
 from flask_login import login_required
 from . import api_utils
-from .api_utils import get_str, get_strp, get_float, get_floatp, get_int, get_intp, exception_decorator
+from .api_utils import get_str, get_strp, get_float, get_floatp, get_int, get_intp, exception_decorator, get_filename_from_uuid_filename
 import json
 import requests
 import uuid
@@ -91,7 +91,7 @@ def file_upload():
     if not os.path.isdir(target):
         os.mkdir(target)
     file = request.files['file']
-    filename = secure_filename(file.filename)
+    filename = secure_filename(str(uuid.uuid4()) + '-' + file.filename)
     destination = "/".join([target, filename])
     file.save(destination)
 
@@ -108,7 +108,7 @@ def recent_files():
     # Check to see if we're allowed to load recent files
     if not plotplot_config.allow_recent_files():
         return json.dumps({'error': 'Recent file loading disabled.'})
-        
+
     dir = api_utils.upload_folder + '/'
     return files_in_folder(dir)
 
@@ -141,7 +141,7 @@ def files_in_folder(dir):
     for csv in csvfiles:
         if os.path.isfile(csv):
             size = os.path.getsize(csv)
-            out.append([os.path.basename(csv), size])
+            out.append([os.path.basename(csv), get_filename_from_uuid_filename(os.path.basename(csv)), size])
 
     return json.dumps(out)
 
@@ -279,7 +279,7 @@ def resume_session():
         'json_state':
         res[0]['json_state'],
         'filename':
-        os.path.basename(res[0]['filename']),
+        get_filename_from_uuid_filename(os.path.basename(res[0]['filename'])),
         'file_needs_load':
         not session_live,
         'file_needs_cloud_download': (gdrive_file_info is not None),
@@ -405,7 +405,7 @@ def get_sessions():
 
         user_sessions.append({
             'id': session['id'],
-            'filename': os.path.basename(session['filename']),
+            'filename': get_filename_from_uuid_filename(os.path.basename(session['filename'])),
             'updated': time.mktime(updated.timetuple())
         })
 

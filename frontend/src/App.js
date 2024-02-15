@@ -620,7 +620,7 @@ class App extends React.Component {
         for (let i = 0; i < this.state.recentFiles.length; i++) {
             let fileData = this.state.recentFiles[i]
             recentFiles.push(
-                <tr key={fileData[0]}><td className="text-start" style={{ overflowWrap: 'anywhere' }}>{fileData[0]}</td><td>{this.formatBytes(fileData[1])}</td><td><Button variant="outline-primary" onClick={() => this.useRecentFile(fileData[0], fileData[1])}>Load</Button></td></tr>
+                <tr key={fileData[1]}><td className="text-start" style={{ overflowWrap: 'anywhere' }}>{fileData[1]}</td><td>{this.formatBytes(fileData[2])}</td><td><Button variant="outline-primary" onClick={() => this.useRecentFile(fileData[0], fileData[2])}>Load</Button></td></tr>
             )
         }
 
