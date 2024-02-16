@@ -607,7 +607,7 @@ class App extends React.Component {
         // Compute rows for restoring sessions
         let sessions = []
         for (let session of this.state.knownSessions) {
-            sessions.push(<tr key={session['id']} style={{ overflowWrap: 'anywhere' }}><td>{formatDistance(new Date(session['updated'] * 1e3), new Date()) + ' ago'}</td><td>{session['filename']}</td><td><Button style={{ whiteSpace: 'nowrap' }} onClick={() => this.resumeSession(session)}>Resume</Button></td></tr>)
+            sessions.push(<tr key={'session' + session['id']} style={{ overflowWrap: 'anywhere' }}><td>{formatDistance(new Date(session['updated'] * 1e3), new Date()) + ' ago'}</td><td>{session['filename']}</td><td><Button style={{ whiteSpace: 'nowrap' }} onClick={() => this.resumeSession(session)}>Resume</Button></td></tr>)
         }
 
         let rowsData = ''
@@ -620,7 +620,7 @@ class App extends React.Component {
         for (let i = 0; i < this.state.recentFiles.length; i++) {
             let fileData = this.state.recentFiles[i]
             recentFiles.push(
-                <tr key={fileData[1]}><td className="text-start" style={{ overflowWrap: 'anywhere' }}>{fileData[1]}</td><td>{this.formatBytes(fileData[2])}</td><td><Button variant="outline-primary" onClick={() => this.useRecentFile(fileData[0], fileData[2])}>Load</Button></td></tr>
+                <tr key={i + fileData[1]}><td className="text-start" style={{ overflowWrap: 'anywhere' }}>{fileData[1]}</td><td>{this.formatBytes(fileData[2])}</td><td><Button variant="outline-primary" onClick={() => this.useRecentFile(fileData[0], fileData[2])}>Load</Button></td></tr>
             )
         }
 

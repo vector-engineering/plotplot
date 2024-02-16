@@ -738,7 +738,7 @@ class Plotplot extends React.Component {
                     >Copy</Button>
                 </div>
             </DropdownButton></>)
-        if (!showUserData(this.props.email)) {
+        if (!this.props.backendConfig || !('multi_user_mode' in this.props.backendConfig) || !this.props.backendConfig['multi_user_mode']) {
             shareButton = <></>
         }
 

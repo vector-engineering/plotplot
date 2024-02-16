@@ -610,7 +610,7 @@ class PlotGroup extends React.Component {
 
     parseRanges(ranges) {
         let axisNum = ''
-        if (nanPlotsShown(this.props.state.graphJson.layout)) {
+        if (this.props.state.graphJson && nanPlotsShown(this.props.state.graphJson.layout)) {
             // Extract x/y axis3 from ranges.
             axisNum = '3'
         }
