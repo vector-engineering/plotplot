@@ -4,7 +4,8 @@ Drag and drop plotting, data selection, and filtering.
 Developed by the [Deverman lab](https://vector.engineering).
 
 ## Live demo
-- [Demo server](https://live.plotplot.org/session/c571babe-0c5e-4c02-a797-6db71585d74a) (deletes your sessions after 24 hours)
+- [Demo server with example data](https://live.plotplot.org/session/c571babe-0c5e-4c02-a797-6db71585d74a)
+- [Demo -- bring your own .csv](https://live.plotplot.org) (deletes your sessions after 24 hours)
 
 ## Installation
 `pip install plotplot`
@@ -24,6 +25,7 @@ Developed by the [Deverman lab](https://vector.engineering).
  - Categorical filtering
  - Sequence filtering
  - Native NaN support
+ - Interactive column-based math
  - User accounts and sharing sessions (for server deployments)
 
 ## Screenshots
