@@ -823,7 +823,7 @@ export default class FilterDialog extends React.Component {
         this.setState({
             showNameFilterModalBody: true,
             hasFocusedFilterName: false,
-            filterNameControlValue: `${this.props.varName}: ${this.state.levenshteinSeq} | levenshtein <= ${this.state.levenshteinN}`
+            filterNameControlValue: `${this.props.varName}: ${this.state.levenshteinSeq} | levenshtein <= ${this.state.computedLevenshteinN}`
         });
         setTimeout(() => { document.getElementById('filterNameInput').focus() }, 100);
     }

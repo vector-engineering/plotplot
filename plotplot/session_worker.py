@@ -999,7 +999,7 @@ class SessionWorker(mp.Process):
         return out
 
     def levenshtein_filter(self, args):
-        df, subsets, subset_counter, math_vars = self.get_data()
+        df, subsets, subset_counter, math_vars, col_labels = self.get_data()
         if df is None:
             return json.dumps({'error': api_utils.data_not_loaded_str})
 
