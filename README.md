@@ -99,6 +99,7 @@ git clone git@github.com:vector-engineering/plotplot.git
 DOCKER_BUILDKIT=1 docker build -f Dockerfile -t plotplot .
 ```
  - pass `--build-arg URL_PREFIX=/my-custom-plotplot` if you want to change the URL_PREFIX
+ - you must also change frontend/package.json's homepage line to match your URL_PREFIX
 
 
 ### Step 3: Run docker image

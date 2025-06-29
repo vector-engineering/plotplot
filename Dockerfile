@@ -16,7 +16,7 @@
 # RUN npm run build
 
 # Build step #1: build the React front end
-FROM node:16-alpine as build-step
+FROM node:18-alpine as build-step
 ARG URL_PREFIX
 
 WORKDIR /app

@@ -2,7 +2,7 @@
   "name": "plotplot",
   "version": "1.0.1",
   "private": true,
-  "homepage": "/plotplot",
+  "homepage": "/",
   "license": "GPL-3.0",
   "dependencies": {
     "@geoffcox/react-splitter": "^2.1.2",
