@@ -1,5 +1,6 @@
 from apiclient.discovery import build
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2 import service_account
+
 
 from googleapiclient.http import MediaIoBaseDownload
 import os
@@ -12,8 +13,7 @@ SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 class PlotplotGdrive():
 
     def __init__(self):
-        creds = ServiceAccountCredentials.from_json_keyfile_name(
-            plotplot_config.get_plotplot_config()['google drive']['google_drive_key_json_path'], SCOPES)
+        creds = service_account.Credentials.from_service_account_file(plotplot_config.get_plotplot_config()['google drive']['google_drive_key_json_path'], scopes=SCOPES)
 
         # Build the service object.
         self.service = build('drive', 'v3', credentials=creds)
